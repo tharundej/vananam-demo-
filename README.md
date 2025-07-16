@@ -22,7 +22,7 @@ This project is a simple Node.js web application containerized using Docker, wit
 
 ### CI Steps:
 - Checkout code
-- Run dummy tests
+- Run dummy tests cases(QA team will provide)
 - Build Docker image
 
 ### CD Steps:
