@@ -39,9 +39,9 @@ This project is a simple Node.js web application containerized using Docker, wit
 
 ## Pipeline Steps (optionally)
 
-3. Build the Docker image.
-4. Optionally, run tests.
-5. Optionally, push to DockerHub or deploy(prod).
+1. Build the Docker image.
+2. Optionally, run tests.
+3. Optionally, push to DockerHub or deploy(prod).
 
 ## Setup Instructions
 - Create a GitHub repo and push your project code.
