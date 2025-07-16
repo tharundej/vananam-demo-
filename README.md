@@ -37,7 +37,7 @@ This project is a simple Node.js web application containerized using Docker, wit
 
 
 
-## Pipeline Steps (optionally)
+## Pipeline Steps for prod
 
 1. Build the Docker image.
 2. Optionally, run tests.
