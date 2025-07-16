@@ -22,9 +22,9 @@ jobs:
 
       - name: Deployment to staging
         run: |
-          # docker stop hello-node-staging || true
-          # docker rm hello-node-staging || true
-          docker run -d -p 8080:8080 --name hello-node-staging hello-node-app
+             docker stop hello-node-staging || true
+             docker rm hello-node-staging || true
+             docker run -d -p 8080:8080 --name hello-node-staging hello-node-app
 
       - name: Health Check
         run: |
