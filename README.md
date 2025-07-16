@@ -1,20 +1,47 @@
-# vananam-demo-123
-# CI/CD Setup Documentation
+# vananam-demo
 
-## Project Overview
-A simple Node.js app that serves "Hello, World!" via Express and runs in a Docker container.
+# Node.js Docker App – CI/CD Setup
 
-Task #1
+## Overview
+This project is a simple Node.js web application containerized using Docker, with a GitHub Actions CI/CD pipeline that:
+
+- Builds the Docker image on every push to `main`
+- Runs dummy tests
+- Deploys the container to a simulated staging environment
+- Rolls back automatically if health check fails
+
+## Requirements
+- Node.js 16+
+- Docker installed
+- GitHub repository
 
 ## CI/CD Tool
-**GitHub Actions** is used for CI/CD due to its easy integration with GitHub, zero-cost for public repos, and flexible workflow configuration.
+**GitHub Actions** is used due to tight GitHub integration and no external infrastructure needed.
 
-## Pipeline Steps
-1. Checkout the code.
-2. Install Node.js and dependencies.
+## Pipeline Breakdown
+
+### CI Steps:
+- Checkout code
+- Run dummy tests
+- Build Docker image
+
+### CD Steps:
+- Run container on port 8080
+- Health check via curl
+- Rollback if health check fails
+
+## Notes
+- Works best in local/self-hosted runners and github codespace.
+- For production-grade setups, use GitHub Container Registry or DockerHub for image persistence.
+
+
+
+
+## Pipeline Steps (optionally)
+
 3. Build the Docker image.
 4. Optionally, run tests.
-5. Optionally, push to DockerHub or deploy.
+5. Optionally, push to DockerHub or deploy(prod).
 
 ## Setup Instructions
 - Create a GitHub repo and push your project code.
