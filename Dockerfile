@@ -5,6 +5,8 @@ FROM node:16
 WORKDIR /app
 
 # Copy package and source code
+RUN npm init -y
+RUN npm install express
 COPY package*.json ./
 COPY . .
 
@@ -15,4 +17,4 @@ RUN npm install
 EXPOSE 8080
 
 # Start the application
-CMD ["node", "index.js"]
+CMD ["node", "app.js"]
