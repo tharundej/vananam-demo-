@@ -1,0 +1,33 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+     
+      - name: Run dummy test
+        run: echo "Dummy test passed"
+
+      - name: Build Docker image
+        run: docker build -t hello-node-app .
+
+
+      - name: Deployment to staging
+        run: |
+          # docker stop hello-node-staging || true
+          # docker rm hello-node-staging || true
+          docker run -d -p 8080:8080 --name hello-node-staging hello-node-app
+
+      - name: Health Check
+        run: |
+          sleep 5
+          curl -f http://localhost:8080 || (echo "Health check failed, rolling back" && docker stop hello-node-staging && exit 1)
+      
