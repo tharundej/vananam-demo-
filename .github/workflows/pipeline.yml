@@ -12,22 +12,27 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-     
       - name: Run dummy test
         run: echo "Dummy test passed"
 
       - name: Build Docker image
         run: docker build -t hello-node-app .
 
+      - name: Docker Login
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Tag and Push to Docker Hub
+        run: |
+          docker tag hello-node-app ${{ secrets.DOCKER_USERNAME }}/hello-node-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/hello-node-app:latest
 
       - name: Deployment to staging
         run: |
-             docker stop hello-node-staging || true
-             docker rm hello-node-staging || true
-             docker run -d -p 8080:8080 --name hello-node-staging hello-node-app
+          docker stop hello-node-staging || true
+          docker rm hello-node-staging || true
+          docker run -d -p 8080:8080 --name hello-node-staging ${{ secrets.DOCKER_USERNAME }}/hello-node-app:latest
 
       - name: Health Check
         run: |
           sleep 5
           curl -f http://localhost:8080 || (echo "Health check failed, rolling back" && docker stop hello-node-staging && exit 1)
-      
