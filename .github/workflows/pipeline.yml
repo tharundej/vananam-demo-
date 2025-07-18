@@ -19,7 +19,7 @@ jobs:
         run: docker build -t hello-node-app .
 
       - name: Docker Login
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" -p, --password
 
       - name: Tag and Push to Docker Hub
         run: |
